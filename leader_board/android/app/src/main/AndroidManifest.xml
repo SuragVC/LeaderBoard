@@ -1,4 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+ <!-- Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- Required for accessing the internet -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Optional, for accessing network state -->
     <application
         android:label="leader_board"
         android:name="${applicationName}"
