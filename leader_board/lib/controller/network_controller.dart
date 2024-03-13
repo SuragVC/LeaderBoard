@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class NetworkController extends GetxController {
-  final Connectivity _connectivity = Connectivity();
+  final Connectivity connectivity = Connectivity();
 
   @override
   void onInit() {
     super.onInit();
-    _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+    connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
   }
 
   void _updateConnectionStatus(ConnectivityResult connectivityResult) {

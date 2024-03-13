@@ -10,20 +10,45 @@ class LeaderListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ListTile(
-        leading: _buildPointsCircle(rank),
-        title: Text(user.name),
-        trailing: _buildAvatar(user.profilePic),
-        subtitle: Text(user.points.toString()),
+      padding: const EdgeInsets.all(10.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.grey[200],
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: ListTile(
+          leading: _buildPointsCircle(rank),
+          title: Text(user.name),
+          trailing: _buildAvatar(user.profilePic),
+          subtitle: Text(user.points.toString()),
+        ),
       ),
     );
   }
 
   Widget _buildAvatar(String profilePic) {
     return CircleAvatar(
-      radius: 28,
-      backgroundImage: NetworkImage(profilePic),
+      radius: 22,
+      child: SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: ClipOval(
+          child: Image.network(
+            profilePic,
+            fit: BoxFit.cover,
+            width: 66,
+            height: 66,
+            errorBuilder: (context, error, stackTrace) {
+              return Image.asset(
+                "assets/images/profile_icon.png",
+                fit: BoxFit.cover,
+                width: 66,
+                height: 66,
+              );
+            },
+          ),
+        ),
+      ),
     );
   }
 

@@ -50,7 +50,26 @@ class TopLeaderAwardWidget extends StatelessWidget {
       children: [
         CircleAvatar(
           radius: 33,
-          backgroundImage: NetworkImage(user.profilePic),
+          child: SizedBox(
+            width: double.infinity,
+            height: double.infinity,
+            child: ClipOval(
+              child: Image.network(
+                user.profilePic,
+                fit: BoxFit.cover,
+                width: imageSize,
+                height: imageSize,
+                errorBuilder: (context, error, stackTrace) {
+                  return Image.asset(
+                    "assets/images/profile_icon.png",
+                    fit: BoxFit.cover,
+                    width: imageSize,
+                    height: imageSize,
+                  );
+                },
+              ),
+            ),
+          ),
         ),
         const Gap(20),
         Text(

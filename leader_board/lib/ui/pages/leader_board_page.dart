@@ -3,6 +3,7 @@ import 'package:leader_board/controller/api_controller.dart';
 import 'package:leader_board/schemas.dart';
 import 'package:leader_board/ui/widgets/award_widget.dart';
 import 'package:leader_board/ui/widgets/leader_board_list.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class LeaderBoardPage extends StatefulWidget {
@@ -33,18 +34,48 @@ class _LeaderBoardPageState extends State<LeaderBoardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: null,
-      backgroundColor: Color.fromARGB(255, 9, 13, 17),
-      body: leaderBoardList.isEmpty
-          ? const CircularProgressIndicator()
-          : Column(
-              children: [
-                TopLeaderAwardWidget(
-                  topLeaders: topLeaders!,
+      backgroundColor: const Color.fromARGB(255, 9, 13, 17),
+      body: Provider.of<ApiController>(context, listen: true).isLoading
+          ? Center(
+              child: LottieBuilder.asset("assets/lottie/loader.json"),
+            )
+          : Provider.of<ApiController>(context, listen: true)
+                  .leaderBoard
+                  .isEmpty
+              ? Center(
+                  child: Container(
+                    padding: const EdgeInsets.all(8.0),
+                    margin: const EdgeInsets.symmetric(vertical: 8.0),
+                    decoration: BoxDecoration(
+                      color: Colors.redAccent,
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.warning,
+                          color: Colors.white,
+                        ),
+                        SizedBox(width: 8.0),
+                        Text(
+                          'Please Turn on internet to load data',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              : Column(
+                  children: [
+                    TopLeaderAwardWidget(
+                      topLeaders: topLeaders!,
+                    ),
+                    SingleChildScrollView(
+                      child: LeaderBoardList(leaderBoardList: leaderBoardList),
+                    )
+                  ],
                 ),
-                SingleChildScrollView(
-                    child: LeaderBoardList(leaderBoardList: leaderBoardList))
-              ],
-            ),
     );
   }
 }
