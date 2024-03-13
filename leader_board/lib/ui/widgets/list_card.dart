@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:leader_board/controller/state_controller.dart';
 import 'package:leader_board/schemas.dart';
+import 'package:provider/provider.dart';
 
 class LeaderListItem extends StatelessWidget {
   final User user;
@@ -14,7 +16,7 @@ class LeaderListItem extends StatelessWidget {
       padding: const EdgeInsets.all(10.0),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.grey[200],
+          color: Provider.of<StateController>(context).themeData.shadowColor,
           borderRadius: BorderRadius.circular(10),
         ),
         child: ListTile(

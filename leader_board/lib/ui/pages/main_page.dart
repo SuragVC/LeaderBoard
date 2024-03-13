@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:go_router/go_router.dart';
 import 'package:leader_board/constants/constant_colors.dart';
+import 'package:leader_board/controller/state_controller.dart';
+import 'package:provider/provider.dart';
 
 class MainPage extends StatefulWidget {
   final Widget child;
@@ -28,8 +30,8 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   late AnimationController _hideBottomBarAnimationController;
 
   final iconList = <IconData>[
-    Icons.person,
     Icons.article,
+    Icons.person,
   ];
 
   @override
@@ -97,25 +99,12 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
     return Scaffold(
       extendBody: true,
       body: widget.child,
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(
-          Icons.home,
-          color: ConstantColors.activeNavigationBarColor,
-        ),
-        onPressed: () {
-          _fabAnimationController.reset();
-          _borderRadiusAnimationController.reset();
-          _borderRadiusAnimationController.forward();
-          _fabAnimationController.forward();
-        },
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: AnimatedBottomNavigationBar.builder(
         itemCount: iconList.length,
         tabBuilder: (int index, bool isActive) {
           final color = isActive
-              ? ConstantColors.activeNavigationBarColor
-              : ConstantColors.notActiveNavigationBarColor;
+              ? ConstantColors.darkActiveNavigationBarColor
+              : ConstantColors.darkNotActiveNavigationBarColor;
           return Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -137,7 +126,9 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
             ],
           );
         },
-        backgroundColor: ConstantColors.bottomNavigationBarBackgroundColor,
+        backgroundColor: Provider.of<StateController>(context)
+            .themeData
+            .scaffoldBackgroundColor,
         activeIndex: widget.selectedIndex,
         notchAndCornersAnimation: borderRadiusAnimation,
         // splashSpeedInMilliseconds: 300,
@@ -149,14 +140,14 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           if (widget.selectedIndex == 0)
             {context.go("/profile")}
           else
-            {context.go("details")}
+            {context.go("/")}
         },
         hideAnimationController: _hideBottomBarAnimationController,
         shadow: const BoxShadow(
           offset: Offset(0, 1),
           blurRadius: 12,
           spreadRadius: 0.5,
-          color: ConstantColors.notActiveNavigationBarColor,
+          color: ConstantColors.darkNotActiveNavigationBarColor,
         ),
       ),
     );

@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:leader_board/schemas.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ApiImplementation {
+class Implementation {
   static Dio dio = Dio();
 
   static Future<LeaderBoardResult> fetchLeaderBoard() async {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:leader_board/controller/api_controller.dart';
+import 'package:leader_board/controller/state_controller.dart';
 import 'package:leader_board/schemas.dart';
 import 'package:leader_board/ui/widgets/award_widget.dart';
 import 'package:leader_board/ui/widgets/leader_board_list.dart';
@@ -19,30 +19,32 @@ class _LeaderBoardPageState extends State<LeaderBoardPage> {
   @override
   void initState() {
     super.initState();
-    Provider.of<ApiController>(context, listen: false).fetchLeaderBoard();
+    Provider.of<StateController>(context, listen: false).fetchLeaderBoard();
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     leaderBoardList =
-        Provider.of<ApiController>(context, listen: true).leaderBoard;
-    topLeaders = Provider.of<ApiController>(context, listen: true).topLeaders;
+        Provider.of<StateController>(context, listen: true).leaderBoard;
+    topLeaders = Provider.of<StateController>(context, listen: true).topLeaders;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: null,
-      backgroundColor: const Color.fromARGB(255, 9, 13, 17),
-      body: Provider.of<ApiController>(context, listen: true).isLoading
+      backgroundColor: Provider.of<StateController>(context)
+          .themeData
+          .scaffoldBackgroundColor,
+      body: Provider.of<StateController>(context, listen: true).isLoading
           ? Center(
               child: SizedBox(
                   height: 100,
                   width: 100,
                   child: LottieBuilder.asset("assets/lottie/loader.json")),
             )
-          : Provider.of<ApiController>(context, listen: true)
+          : Provider.of<StateController>(context, listen: true)
                   .leaderBoard
                   .isEmpty
               ? Center(

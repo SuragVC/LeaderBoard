@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:leader_board/controller/api_controller.dart';
+import 'package:leader_board/controller/state_controller.dart';
 import 'package:leader_board/dependencies/dependency_injection.dart';
 import 'package:leader_board/routes/routes.dart';
+import 'package:leader_board/themes/dark_theme.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -11,7 +12,7 @@ Future<void> main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => ApiController()),
+        ChangeNotifierProvider(create: (_) => StateController()),
       ],
       child: const MyApp(),
     ),
@@ -30,6 +31,9 @@ class MyApp extends StatelessWidget {
       routeInformationParser: router.routeInformationParser,
       routeInformationProvider: router.routeInformationProvider,
       debugShowCheckedModeBanner: false,
+      darkTheme: darkTheme,
+      theme: Provider.of<StateController>(context).themeData,
+      themeMode: ThemeMode.system,
     );
   }
 }

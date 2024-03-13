@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:leader_board/controller/state_controller.dart';
 import 'package:leader_board/schemas.dart';
+import 'package:provider/provider.dart';
 
 class UserDetailsPage extends StatelessWidget {
   const UserDetailsPage({super.key, required this.user});
@@ -11,6 +13,8 @@ class UserDetailsPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Profile'),
       ),
+      backgroundColor:
+          Provider.of<StateController>(context).themeData.canvasColor,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -18,7 +22,22 @@ class UserDetailsPage extends StatelessWidget {
             const Gap(20),
             CircleAvatar(
               radius: 60,
-              backgroundImage: NetworkImage(user.profilePic),
+              child: SizedBox(
+                width: double.infinity,
+                height: double.infinity,
+                child: ClipOval(
+                  child: Image.network(
+                    user.profilePic,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Image.asset(
+                        "assets/images/profile_icon.png",
+                        fit: BoxFit.cover,
+                      );
+                    },
+                  ),
+                ),
+              ),
             ),
             const Gap(20),
             Text(

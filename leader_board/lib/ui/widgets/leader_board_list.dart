@@ -3,8 +3,7 @@ import 'package:leader_board/schemas.dart';
 import 'package:leader_board/ui/widgets/list_card.dart';
 
 class LeaderBoardList extends StatefulWidget {
-  const LeaderBoardList({Key? key, required this.leaderBoardList})
-      : super(key: key);
+  const LeaderBoardList({super.key, required this.leaderBoardList});
 
   final List<User> leaderBoardList;
 

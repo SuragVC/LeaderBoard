@@ -1,20 +1,46 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:leader_board/controller/network_controller.dart';
-import 'package:leader_board/implementation/api_implementation.dart';
+import 'package:leader_board/implementation/implementation.dart';
 import 'package:leader_board/schemas.dart';
+import 'package:leader_board/themes/dark_theme.dart';
+import 'package:leader_board/themes/light_theme.dart';
 
-class ApiController extends ChangeNotifier {
+class StateController extends ChangeNotifier {
   NetworkController networkController = NetworkController();
   List<User> _leaderBoardList = [];
   List<User> get leaderBoard => _leaderBoardList;
   bool _isLoading = true;
-
+  bool _isLightMode = true;
   bool get isLoading => _isLoading;
+  bool get isLightMode => _isLightMode;
+
+  set isLightMode(bool value) {
+    _isLightMode = value;
+    notifyListeners();
+  }
 
   set isLoading(bool value) {
     _isLoading = value;
     notifyListeners();
+  }
+
+  ThemeData _themeData = lightTheme;
+  ThemeData get themeData => _themeData;
+
+  set themeData(ThemeData value) {
+    _themeData = value;
+    notifyListeners();
+  }
+
+  toggleTheme() {
+    if (_themeData == lightTheme) {
+      themeData = darkTheme;
+      isLightMode = false;
+    } else {
+      themeData = lightTheme;
+      isLightMode = true;
+    }
   }
 
   set leaderBoard(List<User> value) {
@@ -47,10 +73,10 @@ class ApiController extends ChangeNotifier {
         await networkController.connectivity.checkConnectivity();
     if (connectivityResult == ConnectivityResult.none) {
       LeaderBoardResult result =
-          await ApiImplementation.fetchLeaderBoardFromSharedPref();
+          await Implementation.fetchLeaderBoardFromSharedPref();
       setTopLeaders(result.leaders);
     } else {
-      LeaderBoardResult result = await ApiImplementation.fetchLeaderBoard();
+      LeaderBoardResult result = await Implementation.fetchLeaderBoard();
       setTopLeaders(result.leaders);
     }
   }
