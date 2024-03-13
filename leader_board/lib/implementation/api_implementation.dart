@@ -37,7 +37,7 @@ class ApiImplementation {
       if (leaderList == null) {
         return LeaderBoardResult(region: "", leaders: []);
       }
-      return LeaderBoardResult.fromJson(jsonDecode(leaderList!));
+      return LeaderBoardResult.fromJson(jsonDecode(leaderList));
     } catch (e) {
       print("Error fetching leaderboard: $e");
       throw e;

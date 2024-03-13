@@ -1,21 +1,24 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:go_router/go_router.dart';
 import 'package:leader_board/constants/constant_colors.dart';
-import 'package:leader_board/ui/pages/leader_board_page.dart';
 
 class MainPage extends StatefulWidget {
-  static String routePath = '/';
-  const MainPage({super.key, required this.child});
   final Widget child;
+  final int selectedIndex;
+
+  const MainPage({
+    super.key,
+    required this.selectedIndex,
+    required this.child,
+  });
 
   @override
-  State<MainPage> createState() => _MainPageState();
+  State createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
-  var _bottomNavIndex = 0;
-
   late AnimationController _fabAnimationController;
   late AnimationController _borderRadiusAnimationController;
   late Animation<double> fabAnimation;
@@ -93,10 +96,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      body: NotificationListener<ScrollNotification>(
-        onNotification: onScrollNotification,
-        child: const LeaderBoardPage(),
-      ),
+      body: widget.child,
       floatingActionButton: FloatingActionButton(
         child: const Icon(
           Icons.home,
@@ -138,14 +138,19 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           );
         },
         backgroundColor: ConstantColors.bottomNavigationBarBackgroundColor,
-        activeIndex: _bottomNavIndex,
+        activeIndex: widget.selectedIndex,
         notchAndCornersAnimation: borderRadiusAnimation,
         // splashSpeedInMilliseconds: 300,
         notchSmoothness: NotchSmoothness.defaultEdge,
         gapLocation: GapLocation.center,
         leftCornerRadius: 32,
         rightCornerRadius: 32,
-        onTap: (index) => setState(() => _bottomNavIndex = index),
+        onTap: (index) => {
+          if (widget.selectedIndex == 0)
+            {context.go("/profile")}
+          else
+            {context.go("details")}
+        },
         hideAnimationController: _hideBottomBarAnimationController,
         shadow: const BoxShadow(
           offset: Offset(0, 1),

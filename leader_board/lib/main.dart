@@ -3,8 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:leader_board/controller/api_controller.dart';
 import 'package:leader_board/dependencies/dependency_injection.dart';
-import 'package:leader_board/ui/pages/home_page.dart';
-import 'package:leader_board/ui/pages/main_page.dart';
+import 'package:leader_board/routes/routes.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -26,11 +25,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
-    return const GetMaterialApp(
+    return GetMaterialApp.router(
+      routerDelegate: router.routerDelegate,
+      routeInformationParser: router.routeInformationParser,
+      routeInformationProvider: router.routeInformationProvider,
       debugShowCheckedModeBanner: false,
-      home: MainPage(
-        child: HomePage(),
-      ),
     );
   }
 }

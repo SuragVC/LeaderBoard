@@ -34,10 +34,10 @@ class ApiController extends ChangeNotifier {
     leaders.sort((a, b) => b.points.compareTo(a.points));
 
     _topLeaders =
-        TopLeaders(first: leaders.first, second: leaders[1], third: leaders[3]);
+        TopLeaders(first: leaders.first, second: leaders[1], third: leaders[2]);
     leaders.removeAt(0);
-    leaders.removeAt(1);
-    leaders.removeAt(2);
+    leaders.removeAt(0);
+    leaders.removeAt(0);
     leaderBoard = leaders;
     notifyListeners();
   }

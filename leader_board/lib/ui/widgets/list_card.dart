@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:leader_board/schemas.dart';
 
 class LeaderListItem extends StatelessWidget {
@@ -17,6 +18,7 @@ class LeaderListItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: ListTile(
+          onTap: () => {context.go("/details", extra: user)},
           leading: _buildPointsCircle(rank),
           title: Text(user.name),
           trailing: _buildAvatar(user.profilePic),

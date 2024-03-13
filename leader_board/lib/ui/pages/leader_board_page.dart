@@ -37,7 +37,10 @@ class _LeaderBoardPageState extends State<LeaderBoardPage> {
       backgroundColor: const Color.fromARGB(255, 9, 13, 17),
       body: Provider.of<ApiController>(context, listen: true).isLoading
           ? Center(
-              child: LottieBuilder.asset("assets/lottie/loader.json"),
+              child: SizedBox(
+                  height: 100,
+                  width: 100,
+                  child: LottieBuilder.asset("assets/lottie/loader.json")),
             )
           : Provider.of<ApiController>(context, listen: true)
                   .leaderBoard
