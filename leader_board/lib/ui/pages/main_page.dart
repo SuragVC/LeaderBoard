@@ -14,7 +14,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
-  var _bottomNavIndex = 0; //default index of a first screen
+  var _bottomNavIndex = 0;
 
   late AnimationController _fabAnimationController;
   late AnimationController _borderRadiusAnimationController;
@@ -93,12 +93,6 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      appBar: AppBar(
-        title: const Text(
-          "",
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
       body: NotificationListener<ScrollNotification>(
         onNotification: onScrollNotification,
         child: const LeaderBoardPage(),
