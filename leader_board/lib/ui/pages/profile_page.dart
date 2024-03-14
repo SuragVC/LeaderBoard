@@ -18,11 +18,11 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor:
-            Provider.of<StateController>(context).themeData.canvasColor,
+            Provider.of<StateController>(context).themeData.primaryColor,
         title: const Text('User Profile'),
       ),
       backgroundColor:
-          Provider.of<StateController>(context).themeData.primaryColorLight,
+          Provider.of<StateController>(context).themeData.colorScheme.primary,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

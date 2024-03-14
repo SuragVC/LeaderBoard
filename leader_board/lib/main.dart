@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
+import 'package:leader_board/controller/network_controller.dart';
 import 'package:leader_board/controller/state_controller.dart';
-import 'package:leader_board/dependencies/dependency_injection.dart';
 import 'package:leader_board/routes/routes.dart';
 import 'package:leader_board/themes/dark_theme.dart';
 import 'package:provider/provider.dart';
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MultiProvider(
       providers: [
+        StreamProvider<NetworkStatus>(
+          create: (context) =>
+              NetworkController().networkStatusController.stream,
+          initialData: NetworkStatus.Online,
+        ),
         ChangeNotifierProvider(create: (_) => StateController()),
       ],
       child: const MyApp(),
     ),
   );
-  DependencyInjection.init();
 }
 
 class MyApp extends StatelessWidget {
@@ -25,15 +28,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Set system UI mode
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
-    return GetMaterialApp.router(
+
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      themeMode: ThemeMode.system,
+      theme: Provider.of<StateController>(context).themeData,
+      darkTheme: darkTheme,
       routerDelegate: router.routerDelegate,
       routeInformationParser: router.routeInformationParser,
       routeInformationProvider: router.routeInformationProvider,
-      debugShowCheckedModeBanner: false,
-      darkTheme: darkTheme,
-      theme: Provider.of<StateController>(context).themeData,
-      themeMode: ThemeMode.system,
     );
   }
 }

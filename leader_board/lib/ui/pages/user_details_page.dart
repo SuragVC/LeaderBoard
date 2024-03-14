@@ -11,10 +11,12 @@ class UserDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor:
+            Provider.of<StateController>(context).themeData.colorScheme.primary,
         title: const Text('Profile'),
       ),
       backgroundColor:
-          Provider.of<StateController>(context).themeData.canvasColor,
+          Provider.of<StateController>(context).themeData.colorScheme.primary,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -63,7 +65,7 @@ class UserDetailsPage extends StatelessWidget {
                 style: TextStyle(fontSize: 16),
               ),
             ),
-            SizedBox(height: 20),
+            const Gap(20),
           ],
         ),
       ),

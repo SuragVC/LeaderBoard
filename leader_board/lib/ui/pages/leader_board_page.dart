@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:leader_board/controller/network_controller.dart';
 import 'package:leader_board/controller/state_controller.dart';
 import 'package:leader_board/schemas.dart';
 import 'package:leader_board/ui/widgets/award_widget.dart';
@@ -16,10 +19,13 @@ class LeaderBoardPage extends StatefulWidget {
 class _LeaderBoardPageState extends State<LeaderBoardPage> {
   List<User> leaderBoardList = [];
   TopLeaders? topLeaders;
+  NetworkController _networkController = NetworkController();
+  late StreamSubscription<NetworkStatus> _networkStatusSubscription;
   @override
   void initState() {
     super.initState();
-    Provider.of<StateController>(context, listen: false).fetchLeaderBoard();
+    Provider.of<StateController>(context, listen: false)
+        .fetchLeaderBoard(context: context);
   }
 
   @override

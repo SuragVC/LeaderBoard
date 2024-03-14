@@ -27,9 +27,7 @@ class _TopLeaderAwardWidgetState extends State<TopLeaderAwardWidget> {
           alignment: Alignment.center,
           children: [
             GestureDetector(
-              onTap: () async {
-                await player.play(AssetSource("assets/audio/audio.mp3"));
-              },
+              onTap: () {},
               child: Stack(
                 children: [
                   Container(

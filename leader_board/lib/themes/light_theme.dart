@@ -21,8 +21,21 @@ ThemeData lightTheme = ThemeData(
   ),
   shadowColor: Colors.grey.shade300,
   iconTheme: const IconThemeData(
-    color: ConstantColors.lightPrimaryColor,
+    color: ConstantColors.whiteColor,
   ),
+  fontFamily: "Poppins",
+  colorScheme: const ColorScheme(
+      brightness: Brightness.dark,
+      primary: ConstantColors.whiteColor,
+      onPrimary: ConstantColors.lightPrimaryColor,
+      secondary: ConstantColors.lightPrimaryColor,
+      onSecondary: ConstantColors.lightPrimaryColor,
+      error: ConstantColors.darkButtonColor,
+      onError: ConstantColors.darkButtonColor,
+      background: ConstantColors.darkButtonColor,
+      onBackground: ConstantColors.darkButtonColor,
+      surface: ConstantColors.darkButtonColor,
+      onSurface: ConstantColors.darkButtonColor),
   buttonTheme: const ButtonThemeData(
     buttonColor: ConstantColors.lightPrimaryColor,
     textTheme: ButtonTextTheme.primary,

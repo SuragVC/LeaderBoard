@@ -1,4 +1,3 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:leader_board/controller/network_controller.dart';
 import 'package:leader_board/implementation/implementation.dart';
@@ -68,10 +67,11 @@ class StateController extends ChangeNotifier {
     notifyListeners();
   }
 
-  fetchLeaderBoard() async {
-    ConnectivityResult connectivityResult =
-        await networkController.connectivity.checkConnectivity();
-    if (connectivityResult == ConnectivityResult.none) {
+  fetchLeaderBoard({required BuildContext context}) async {
+    NetworkController networkController = NetworkController();
+    NetworkStatus currentStatus =
+        await networkController.getCurrentNetworkStatus(context: context);
+    if (currentStatus == NetworkStatus.Offline) {
       LeaderBoardResult result =
           await Implementation.fetchLeaderBoardFromSharedPref();
       setTopLeaders(result.leaders);
