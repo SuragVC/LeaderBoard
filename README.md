@@ -2,21 +2,23 @@
 
 LeaderBoard is a dynamic application designed to showcase a list of users based on their ranks. Crafted with Flutter, this app employs Provider as the state management solution, ensuring seamless data handling. It navigates smoothly using the GoRouter package, offering a delightful user experience.
 
-Features:
-Light and Dark Themes: Experience the app in your preferred visual environment with the option to switch between light and dark themes effortlessly.
+ Features:
+  
+* Light and Dark Themes: Experience the app in your preferred visual environment with the option to switch between light and dark themes effortlessly.
 
-Offline Functionality: Stay connected even when offline. LeaderBoard ensures that you can access essential functionalities and cached data even without an internet connection.
+* Offline Functionality: Stay connected even when offline. LeaderBoard ensures that you can access essential functionalities and cached data even without an internet connection.
 
-User Rankings: Explore a comprehensive list of users ranked according to various criteria. Get insights into their achievements and contributions.
+* User Rankings: Explore a comprehensive list of users ranked according to their ranks.
 
-Flutter-Powered UI: Enjoy a smooth and intuitive user interface crafted using Flutter, providing a consistent experience across different devices and platforms.
+* Flutter-Powered UI: Enjoy a smooth and intuitive user interface crafted using Flutter, providing a consistent experience across different devices and platforms.
 
 Technologies Used:
-Flutter: Leveraging Google's UI toolkit for building natively compiled applications for mobile, web, and desktop from a single codebase.
 
-Provider: Employing Provider as the state management solution, ensuring efficient and robust data handling across the application.
+* Flutter: Leveraging Google's UI toolkit for building natively compiled applications for mobile, web, and desktop from a single codebase.
 
-GoRouter: Utilizing the GoRouter package for navigation within the app, enabling seamless transitions between different screens and functionalities.
+* Provider: Employing Provider as the state management solution, ensuring efficient and robust data handling across the application.
+
+* GoRouter: Utilizing the GoRouter package for navigation within the app, enabling seamless transitions between different screens and functionalities.
 ### APK Link
 https://drive.google.com/file/d/166gxKQjeAwmNlZ6hOfXcc1H0glgr2hmP/view?usp=drivesdk
 ## Screenshots
